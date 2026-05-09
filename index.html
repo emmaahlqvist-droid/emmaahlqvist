@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emma Ahlqvist — Visual Designer</title>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F2EFE8;
+    --cream-dark: #E8E4DA;
+    --charcoal: #2C2A27;
+    --charcoal-mid: #3E3B37;
+    --charcoal-light: #5A5750;
+    --gold: #C8A84B;
+    --gold-hover: #B8983B;
+    --gold-light: #F0DFA0;
+    --blue-accent: #3886ff;
+    --blue-light: #A8BFEA;
+    --white: #FFFFFF;
+    --col: calc(100% / 12);
+    --gutter: 24px;
+    --max: 1280px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    color: var(--charcoal);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* GRID */
+  .container {
+    width: 100%;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--gutter);
+  }
+
+  /* TYPOGRAPHY */
+  h1, h2, h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+  }
+
+  h1 { font-size: clamp(3rem, 7vw, 5.5rem); line-height: 1.0; letter-spacing: -0.02em; }
+  h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; }
+  h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.2; }
+
+  .subheader {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    letter-spacing: 0.01em;
+  }
+
+  p {
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--charcoal-light);
+  }
+
+  /* ============================
+     HERO SECTION
+  ============================ */
+  .hero {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+    overflow: visible;
+    min-height: 48vh;
+  }
+
+  .hero-image-col {
+    flex: 0 0 33.333%;
+    position: relative;
+    overflow: hidden;
+    margin-left: calc(-1 * ((100vw - min(100%, var(--max))) / 2));
+    margin-left: calc(-1 * max(0px, (100vw - var(--max)) / 2) - var(--gutter));
+  }
+
+  .hero-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-content-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 60px 60px 64px;
+    background: var(--white);
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+  }
+
+  /* ANIMATED CIRCLES — HERO */
+  .hero-circle-large {
+    position: absolute;
+    top: 28px;
+    left: -44px;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: var(--blue-accent);
+    opacity: 0;
+    transform: scale(0.3);
+    animation: circlePopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+    z-index: 10;
+  }
+
+  @keyframes circlePopIn {
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .hero-title {
+    margin-top: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .hero-desc {
+    margin-top: 20px;
+    max-width: 520px;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeUp 0.6s ease 0.75s forwards;
+  }
+
+  .hero-desc p {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    color: var(--charcoal);
+    line-height: 1.5;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============================
+     ABOUT SECTION
+  ============================ */
+  .about {
+    background: var(--cream);
+    padding: 80px 0 100px;
+    overflow: hidden;
+  }
+
+  .about-avatar-wrap {
+    grid-column: 1 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+  }
+
+  @keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+
+  @keyframes slideInLeftAvatar {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .about-avatar-wrap.animate-in .about-avatar {
+    animation: slideInLeftAvatar 0.75s cubic-bezier(0.34, 1.3, 0.64, 1) 0s forwards;
+  }
+
+  @keyframes slideInLeftCenter {
+    from { opacity: 0; transform: translateX(-60px) translateY(-50%); }
+    to { opacity: 0.8; transform: translateX(0) translateY(-50%); }
+  }
+
+  .about-avatar-wrap.animate-in .about-circle-bg {
+    animation: slideInLeftCenter 0.75s cubic-bezier(0.34, 1.3, 0.64, 1) 0.35s forwards;
+  }
+
+  .about-circle-bg {
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #3886ff;
+    z-index: 3;
+    opacity: 0;
+    transform: translateX(-60px) translateY(-50%);
+  }
+
+  .about-avatar {
+    position: relative;
+    z-index: 2;
+    left: 32px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  .about-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .about-text {
+    grid-column: 4 / 12;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0 0 40px;
+  }
+
+  .about-text p {
+    font-size: clamp(1rem, 1.3vw, 1.1rem);
+    line-height: 1.8;
+    color: var(--charcoal-mid);
+  }
+
+  /* ============================
+     CONTACT SECTION
+  ============================ */
+  .contact {
+    background: var(--charcoal);
+    padding: 100px 0;
+  }
+
+  .contact h2 {
+    color: var(--white);
+  }
+
+  .contact-subtext {
+    color: rgba(255,255,255,0.55);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+
+  .contact-header {
+    grid-column: 1 / 13;
+    margin-bottom: 48px;
+  }
+
+  .contact-form-col {
+    grid-column: 1 / 8;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 16px 18px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    -webkit-appearance: none;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.3);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: #3886ff;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .form-group textarea {
+    height: 180px;
+    resize: vertical;
+  }
+
+  .btn-send {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: var(--gold);
+    color: var(--charcoal);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+    text-decoration: none;
+  }
+
+  .btn-send:hover {
+    background: #3886ff;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .btn-send:active {
+    transform: translateY(0);
+  }
+
+  /* ============================
+     FOOTER
+  ============================ */
+  footer {
+    background: var(--charcoal);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+    font-family: 'Work Sans', sans-serif;
+  }
+
+  .footer-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    display: flex;
+    align-items: center;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    gap: 6px;
+  }
+
+  .footer-links a:hover {
+    color: var(--gold);
+  }
+
+  .linkedin-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    flex-shrink: 0;
+  }
+  .linkedin-icon rect {
+    fill: rgba(255,255,255,0.35);
+    transition: fill 0.2s ease;
+  }
+  .linkedin-icon path {
+    fill: rgba(255,255,255,0.45);
+    transition: fill 0.2s ease;
+  }
+  .footer-links a:hover .linkedin-icon rect {
+    fill: var(--gold);
+  }
+  .footer-links a:hover .linkedin-icon path {
+    fill: var(--charcoal);
+  }
+
+  /* Form success state */
+  .form-success {
+    display: none;
+    padding: 20px;
+    background: rgba(200, 168, 75, 0.15);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    color: var(--gold-light);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1rem;
+    margin-top: 16px;
+  }
+
+  /* ============================
+     RESPONSIVE
+  ============================ */
+  @media (max-width: 900px) {
+    .hero { flex-direction: column; }
+    .hero-image-col { flex: none; width: 100%; height: 45vw; margin-left: 0 !important; }
+    .hero-content-col { padding: 48px 32px; }
+    .hero-circle-large { top: -30px; left: 32px; width: 60px; height: 60px; }
+    .about-avatar-wrap { grid-column: 1 / 4; }
+    .about-text { grid-column: 4 / 13; padding-left: 24px; }
+    .contact-form-col { grid-column: 1 / 13; }
+  }
+
+  @media (max-width: 640px) {
+    :root { --gutter: 20px; }
+    .hero-image-col { height: 55vw; }
+    .hero-content-col { padding: 40px var(--gutter); }
+    .hero-circle-large { width: 56px; height: 56px; left: 20px; top: -28px; }
+    .about-avatar-wrap { grid-column: 1 / 13; margin-bottom: 8px; padding-left: 24px; }
+    .about-text { grid-column: 1 / 13; padding-left: 0; margin-top: 24px; }
+    .contact-header { grid-column: 1 / 13; }
+    .contact-form-col { grid-column: 1 / 13; }
+    .footer-inner { flex-direction: column; gap: 16px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================
+     HERO
+============================ -->
+<section class="hero">
+  <div class="hero-image-col">
+    <img src="images/hero.jpg" alt="Forest texture photography" loading="eager">
+  </div>
+  <div class="hero-content-col">
+    <div class="hero-circle-large"></div>
+    <h1 class="hero-title">Emma<br>Ahlqvist</h1>
+    <div class="hero-desc">
+      <p>Hello, I'm a visual designer, art director<br>and creative strategist based in Edinburgh.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     ABOUT
+============================ -->
+<section class="about">
+  <div class="container">
+    <div class="grid-12" style="align-items:center; min-height:320px;">
+
+      <div class="about-avatar-wrap" id="aboutAvatar">
+        <div class="about-circle-bg"></div>
+        <div class="about-avatar">
+          <img src="images/profile.png" alt="Emma Ahlqvist">
+        </div>
+      </div>
+
+      <div class="about-text">
+        <p>I'm a visual designer with passion for telling stories and creating engaging experiences with emerging technologies. With a background in both agencies and in house I have a diverse skill set including branding and identity, creative strategy, print and digital design, UX design, motion, illustration and more. I love learning and I utilise AI in my daily work to fast track ideation, learning and design workflows.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     CONTACT
+============================ -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="grid-12">
+
+      <div class="contact-header">
+        <h2>Contact</h2>
+        <p class="contact-subtext">Reach out for creative insights.</p>
+      </div>
+
+      <div class="contact-form-col">
+        <form id="contactForm" action="https://formsubmit.co/emmaahlqvist@gmail.com" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Portfolio enquiry">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="basic">
+          <input type="text" name="_honey" style="display:none">
+
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Email address" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Message" required></textarea>
+          </div>
+          <button type="submit" class="btn-send">Send message</button>
+          <div class="form-success" id="formSuccess">Message sent — thank you!</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     FOOTER
+============================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 Emma Ahlqvist. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/emma-ahlqvist-29101359/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+          <svg class="linkedin-icon" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <rect width="20" height="20" rx="3"/>
+            <path d="M5.5 8.5h2V15h-2V8.5zm1-3a1.15 1.15 0 110 2.3 1.15 1.15 0 010-2.3zM9 8.5h1.9v.9c.3-.5 1-1 2.1-1 2.2 0 2.6 1.5 2.6 3.4V15h-2v-2.8c0-.9 0-2-1.2-2s-1.4 1-1.4 2V15H9V8.5z"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('animate-in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('#aboutAvatar').forEach(el => observer.observe(el));
+
+  const form = document.getElementById('contactForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      const success = document.getElementById('formSuccess');
+      setTimeout(() => {
+        if (success) success.style.display = 'block';
+      }, 100);
+    });
+  }
+</script>
+
+</body>
+</html>
